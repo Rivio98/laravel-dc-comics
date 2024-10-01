@@ -22,6 +22,12 @@
                     <td>{{ $comic->sale_date }}</td>
                     <td>
                         <a href="{{ route('comics.show', $comic->id) }}" class="btn btn-info btn-sm">Visualizza</a>
+                        <form action="{{ route('comics.destroy', $comic->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Sei sicuro di voler eliminare questo fumetto?')">Elimina</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
