@@ -19,3 +19,6 @@ Route::resource('comics', ComicController::class);
 Route::get('/', function () {
     return view('home');
 });
+
+
+Route::delete('/comics/{id}', [ComicController::class, 'destroy'])->name('comics.destroy');
