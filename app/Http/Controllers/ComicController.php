@@ -57,4 +57,23 @@ class ComicController extends Controller
 
         return redirect()->route('comics.index')->with('success', 'Fumetto creato con successo!');
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'thumb' => 'required|url',
+            'price' => 'required|numeric|min:0',
+            'series' => 'required|string|max:255',
+            'sale_date' => 'required|date',
+            'type' => 'required|string|max:255',
+        ]);
+
+        $comic = Comic::findOrFail($id);
+        $comic->update($request->all());
+
+        return redirect()->route('comics.index')->with('success', 'Fumetto aggiornato con successo!');
+    }
 }
