@@ -3,6 +3,12 @@
 @section('content')
     <h1 class="my-4">Elenco dei Fumetti</h1>
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,6 +28,7 @@
                     <td>{{ $comic->sale_date }}</td>
                     <td>
                         <a href="{{ route('comics.show', $comic->id) }}" class="btn btn-info btn-sm">Visualizza</a>
+                        <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-warning btn-sm">Modifica</a>
                         <form action="{{ route('comics.destroy', $comic->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
