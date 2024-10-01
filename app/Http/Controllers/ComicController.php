@@ -43,18 +43,18 @@ class ComicController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required',
+            'description' => 'required|string',
             'thumb' => 'required|url',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'series' => 'required|string|max:255',
             'sale_date' => 'required|date',
-            'type' => 'required|string|max:50',
+            'type' => 'required|string|max:255',
         ]);
 
-        Comic::create($data);
+        Comic::create($request->all());
 
-        return redirect()->route('comics.index');
+        return redirect()->route('comics.index')->with('success', 'Fumetto creato con successo!');
     }
 }
